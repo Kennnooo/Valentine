@@ -1,219 +1,704 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Be My Valentine ❤️</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Be My Valentine ❤️</title>
 
-<style>
-:root { --red:#ff2f68; }
+  <style>
+    :root {
+      --red: #ff2f68;
+    }
 
-* { box-sizing: border-box; font-family: Poppins, system-ui, sans-serif; }
+    * {
+      box-sizing: border-box;
+      font-family: Poppins, system-ui, sans-serif;
+    }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: linear-gradient(135deg,#ffd1dc,#ffe6f0);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-x: hidden;
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffd1dc, #ffe6f0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 560px;
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      color: var(--red);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    button {
+      padding: 12px 24px;
+      border-radius: 30px;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .yes {
+      background: var(--red);
+      color: white;
+    }
+
+    .no {
+      background: white;
+      color: var(--red);
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: .6;
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-110vh) scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    /* Presents */
+    .presents {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .present {
+      width: 90px;
+      height: 90px;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, .15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      cursor: pointer;
+      animation: float 4s ease-in-out infinite;
+      position: relative;
+    }
+
+    .present:nth-child(1) {
+      transform: rotate(-8deg);
+    }
+
+    .present:nth-child(2) {
+      transform: rotate(6deg);
+    }
+
+    .present:nth-child(3) {
+      transform: rotate(-4deg);
+    }
+
+    @keyframes float {
+      50% {
+        transform: translateY(-14px);
+      }
+    }
+
+    /* Ribbon */
+    .present::before,
+    .present::after {
+      content: "";
+      position: absolute;
+      background: var(--red);
+      transition: .4s ease;
+    }
+
+    .present::before {
+      width: 12px;
+      height: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .present::after {
+      height: 12px;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .present.opened::before,
+    .present.opened::after {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    /* HEART GRID */
+    .heart-grid {
+      display: grid;
+      grid-template-columns: repeat(11, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      gap: 10px;
+      max-width: 520px;
+      margin: 35px auto;
+      animation: pulse 3.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      50% {
+        transform: scale(1.03);
+      }
+    }
+
+    .heart-grid img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(255, 47, 104, .35);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .heart-grid img:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 22px rgba(255, 47, 104, .6);
+    }
+
+    @media (max-width: 520px) {
+      .heart-grid {
+        max-width: 92vw;
+        gap: 7px;
+      }
+    }
+
+    /* GRID POSITIONS */
+    /* Row 1 */
+    .heart-grid img:nth-child(1) {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .heart-grid img:nth-child(2) {
+      grid-column: 4;
+      grid-row: 1;
+    }
+
+    .heart-grid img:nth-child(3) {
+      grid-column: 8;
+      grid-row: 1;
+    }
+
+    .heart-grid img:nth-child(4) {
+      grid-column: 9;
+      grid-row: 1;
+    }
+
+    /* Row 2 */
+    .heart-grid img:nth-child(5) {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .heart-grid img:nth-child(6) {
+      grid-column: 3;
+      grid-row: 2;
+    }
+
+    .heart-grid img:nth-child(7) {
+      grid-column: 4;
+      grid-row: 2;
+    }
+
+    .heart-grid img:nth-child(8) {
+      grid-column: 5;
+      grid-row: 2;
+    }
+
+    .heart-grid img:nth-child(9) {
+      grid-column: 7;
+      grid-row: 2;
+    }
+
+    .heart-grid img:nth-child(10) {
+      grid-column: 8;
+      grid-row: 2;
+    }
+
+    .heart-grid img:nth-child(11) {
+      grid-column: 9;
+      grid-row: 2;
+    }
+
+    .heart-grid img:nth-child(12) {
+      grid-column: 10;
+      grid-row: 2;
+    }
+
+    /* Row 3 */
+    .heart-grid img:nth-child(13) {
+      grid-column: 2;
+      grid-row: 3;
+    }
+
+    .heart-grid img:nth-child(14) {
+      grid-column: 3;
+      grid-row: 3;
+    }
+
+    .heart-grid img:nth-child(15) {
+      grid-column: 4;
+      grid-row: 3;
+    }
+
+    .heart-grid img:nth-child(16) {
+      grid-column: 5;
+      grid-row: 3;
+    }
+
+    .heart-grid img:nth-child(17) {
+      grid-column: 6;
+      grid-row: 3;
+    }
+
+    .heart-grid img:nth-child(18) {
+      grid-column: 7;
+      grid-row: 3;
+    }
+
+    .heart-grid img:nth-child(19) {
+      grid-column: 8;
+      grid-row: 3;
+    }
+
+    .heart-grid img:nth-child(20) {
+      grid-column: 9;
+      grid-row: 3;
+    }
+
+    .heart-grid img:nth-child(21) {
+      grid-column: 10;
+      grid-row: 3;
+    }
+
+    /* Row 4 */
+    .heart-grid img:nth-child(22) {
+      grid-column: 3;
+      grid-row: 4;
+    }
+
+    .heart-grid img:nth-child(23) {
+      grid-column: 4;
+      grid-row: 4;
+    }
+
+    .heart-grid img:nth-child(24) {
+      grid-column: 5;
+      grid-row: 4;
+    }
+
+    .heart-grid img:nth-child(25) {
+      grid-column: 6;
+      grid-row: 4;
+    }
+
+    .heart-grid img:nth-child(26) {
+      grid-column: 7;
+      grid-row: 4;
+    }
+
+    .heart-grid img:nth-child(27) {
+      grid-column: 8;
+      grid-row: 4;
+    }
+
+    .heart-grid img:nth-child(28) {
+      grid-column: 9;
+      grid-row: 4;
+    }
+
+    /* Row 5 */
+    .heart-grid img:nth-child(29) {
+      grid-column: 4;
+      grid-row: 5;
+    }
+
+    .heart-grid img:nth-child(30) {
+      grid-column: 5;
+      grid-row: 5;
+    }
+
+    .heart-grid img:nth-child(31) {
+      grid-column: 6;
+      grid-row: 5;
+    }
+
+    .heart-grid img:nth-child(32) {
+      grid-column: 7;
+      grid-row: 5;
+    }
+
+    .heart-grid img:nth-child(33) {
+      grid-column: 8;
+      grid-row: 5;
+    }
+
+    /* Row 6 */
+    .heart-grid img:nth-child(34) {
+      grid-column: 5;
+      grid-row: 6;
+    }
+
+    .heart-grid img:nth-child(35) {
+      grid-column: 6;
+      grid-row: 6;
+    }
+
+    .heart-grid img:nth-child(36) {
+      grid-column: 7;
+      grid-row: 6;
+    }
+
+    /* Row 7 */
+    .heart-grid img:nth-child(37) {
+      grid-column: 6;
+      grid-row: 7;
+    }
+
+    /* ZOOM OVERLAY */
+    #zoomOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 99;
+    }
+
+    #zoomOverlay img {
+      max-width: 92vw;
+      max-height: 92vh;
+      border-radius: 18px;
+    }
+
+    /* Swipe arrows */
+    .swipe-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2.5rem;
+      color: white;
+      opacity: .7;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity .3s;
+      z-index: 100;
+    }
+
+    #arrowLeft {
+      left: 10px;
+    }
+
+    #arrowRight {
+      right: 10px;
+    }
+
+    .swipe-arrow:hover {
+      opacity: 1;
+    }
+
+    @media (max-width:768px) {
+      .swipe-arrow {
+        display: block;
+      }
+    }
+
+    /* Close button */
+    #zoomClose {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      z-index: 101;
+      opacity: .8;
+      transition: .3s;
+    }
+
+    #zoomClose:hover {
+      opacity: 1;
+    }
+
+    @keyframes floatBouquet {
+    0%, 100% { transform: translateY(-50%) rotate(-15deg); }
+    50% { transform: translateY(-58%) rotate(-10deg); }
 }
-
-.container { max-width: 560px; width: 100%; padding: 20px; text-align: center; position: relative; z-index: 2; }
-
-h1 { color: var(--red); }
-.hidden { display: none; }
-
-button { padding: 12px 24px; border-radius: 30px; border: none; font-size: 1rem; cursor: pointer; }
-.yes { background: var(--red); color: white; }
-.no  { background: white; color: var(--red); }
-
-/* Floating hearts */
-.heart { position: fixed; bottom: -20px; font-size: 20px; animation: floatUp 6s linear infinite; opacity: .6; }
-@keyframes floatUp { to { transform: translateY(-110vh) scale(1.4); opacity: 0; } }
-
-/* Presents */
-.presents { display: flex; gap: 32px; justify-content: center; margin-top: 30px; }
-.present {
-  width: 90px; height: 90px; background: #fff; border-radius: 22px;
-  box-shadow: 0 16px 36px rgba(0,0,0,.15);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2.2rem; cursor: pointer; animation: float 4s ease-in-out infinite; position: relative;
-}
-.present:nth-child(1){ transform: rotate(-8deg); }
-.present:nth-child(2){ transform: rotate(6deg); }
-.present:nth-child(3){ transform: rotate(-4deg); }
-@keyframes float { 50% { transform: translateY(-14px); } }
-
-/* Ribbon */
-.present::before,.present::after{ content:""; position:absolute; background: var(--red); transition:.4s ease; }
-.present::before{ width:12px; height:100%; left:50%; transform: translateX(-50%);}
-.present::after{ height:12px; width:100%; top:50%; transform: translateY(-50%);}
-.present.opened::before,.present.opened::after{ opacity:0; transform: scale(0); }
-
-/* HEART GRID */
-.heart-grid { display: grid; grid-template-columns: repeat(11, 1fr); grid-template-rows: repeat(7, 1fr); gap:10px; max-width:520px; margin:35px auto; animation:pulse 3.5s ease-in-out infinite; }
-@keyframes pulse { 50% { transform: scale(1.03); } }
-
-.heart-grid img { width: 100%; aspect-ratio:1/1; object-fit:cover; border-radius:14px; cursor:pointer; box-shadow:0 0 12px rgba(255,47,104,.35); transition: transform .25s ease, box-shadow .25s ease;}
-.heart-grid img:hover { transform: scale(1.08); box-shadow:0 0 22px rgba(255,47,104,.6); }
-
-@media (max-width: 520px){ .heart-grid { max-width:92vw; gap:7px; } }
-
-/* GRID POSITIONS */
-/* Row 1 */ .heart-grid img:nth-child(1){grid-column:3;grid-row:1;} .heart-grid img:nth-child(2){grid-column:4;grid-row:1;} .heart-grid img:nth-child(3){grid-column:8;grid-row:1;} .heart-grid img:nth-child(4){grid-column:9;grid-row:1;}
-/* Row 2 */ .heart-grid img:nth-child(5){grid-column:2;grid-row:2;} .heart-grid img:nth-child(6){grid-column:3;grid-row:2;} .heart-grid img:nth-child(7){grid-column:4;grid-row:2;} .heart-grid img:nth-child(8){grid-column:5;grid-row:2;} .heart-grid img:nth-child(9){grid-column:7;grid-row:2;} .heart-grid img:nth-child(10){grid-column:8;grid-row:2;} .heart-grid img:nth-child(11){grid-column:9;grid-row:2;} .heart-grid img:nth-child(12){grid-column:10;grid-row:2;}
-/* Row 3 */ .heart-grid img:nth-child(13){grid-column:2;grid-row:3;} .heart-grid img:nth-child(14){grid-column:3;grid-row:3;} .heart-grid img:nth-child(15){grid-column:4;grid-row:3;} .heart-grid img:nth-child(16){grid-column:5;grid-row:3;} .heart-grid img:nth-child(17){grid-column:6;grid-row:3;} .heart-grid img:nth-child(18){grid-column:7;grid-row:3;} .heart-grid img:nth-child(19){grid-column:8;grid-row:3;} .heart-grid img:nth-child(20){grid-column:9;grid-row:3;} .heart-grid img:nth-child(21){grid-column:10;grid-row:3;}
-/* Row 4 */ .heart-grid img:nth-child(22){grid-column:3;grid-row:4;} .heart-grid img:nth-child(23){grid-column:4;grid-row:4;} .heart-grid img:nth-child(24){grid-column:5;grid-row:4;} .heart-grid img:nth-child(25){grid-column:6;grid-row:4;} .heart-grid img:nth-child(26){grid-column:7;grid-row:4;} .heart-grid img:nth-child(27){grid-column:8;grid-row:4;} .heart-grid img:nth-child(28){grid-column:9;grid-row:4;}
-/* Row 5 */ .heart-grid img:nth-child(29){grid-column:4;grid-row:5;} .heart-grid img:nth-child(30){grid-column:5;grid-row:5;} .heart-grid img:nth-child(31){grid-column:6;grid-row:5;} .heart-grid img:nth-child(32){grid-column:7;grid-row:5;} .heart-grid img:nth-child(33){grid-column:8;grid-row:5;}
-/* Row 6 */ .heart-grid img:nth-child(34){grid-column:5;grid-row:6;} .heart-grid img:nth-child(35){grid-column:6;grid-row:6;} .heart-grid img:nth-child(36){grid-column:7;grid-row:6;}
-/* Row 7 */ .heart-grid img:nth-child(37){grid-column:6;grid-row:7;}
-
-/* ZOOM OVERLAY */
-#zoomOverlay { position: fixed; inset:0; background: rgba(0,0,0,.85); display:none; justify-content:center; align-items:center; z-index:99; }
-#zoomOverlay img { max-width:92vw; max-height:92vh; border-radius:18px; }
-/* Swipe arrows */
-.swipe-arrow { position:absolute; top:50%; transform:translateY(-50%); font-size:2.5rem; color:white; opacity:.7; cursor:pointer; user-select:none; transition:opacity .3s; z-index:100;}
-#arrowLeft { left:10px; }
-#arrowRight { right:10px; }
-.swipe-arrow:hover{opacity:1;}
-@media (max-width:768px){ .swipe-arrow { display:block; } }
-/* Close button */
-#zoomClose { position:absolute; top:12px; right:12px; font-size:2rem; color:white; cursor:pointer; z-index:101; opacity:.8; transition:.3s; }
-#zoomClose:hover{opacity:1;}
-</style>
+  </style>
 </head>
 
 <body>
 
-<div id="zoomOverlay">
-  <img id="zoomImg">
-  <div id="arrowLeft" class="swipe-arrow" onclick="prevZoom()">‹</div>
-  <div id="arrowRight" class="swipe-arrow" onclick="nextZoom()">›</div>
-  <div id="zoomClose" onclick="closeZoom()">×</div>
-</div>
-
-<script>
-for(let i=0;i<20;i++){
-  const h=document.createElement("div");
-  h.className="heart";
-  h.textContent="❤️";
-  h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=4+Math.random()*4+"s";
-  document.body.appendChild(h);
-}
-</script>
-
-<div class="container">
-
-<div id="landing">
-  <h1>Will you be my Valentine? 💖</h1>
-  <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" style="max-width:100%;border-radius:16px">
-  <div style="margin-top:25px;display:flex;gap:20px;justify-content:center">
-    <button class="yes" onclick="acceptLove()">Yes 💕</button>
-    <button class="no" onclick="rejectLove()">No 😒</button>
-  </div>
-</div>
-
-<div id="tryAgain" class="hidden">
-  <h1>Try again 😠💗</h1>
-  <img src="https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif">
-  <br><br>
-  <button class="yes" onclick="goBack()">Okay 😳</button>
-</div>
-
-<div id="presentsPage" class="hidden">
-  <h1>Precious Moments 🎁</h1>
-  <div class="presents">
-    <div class="present" onclick="openGift(1,this)">🎁</div>
-    <div class="present" onclick="openGift(2,this)">🎁</div>
-    <div class="present" onclick="openGift(3,this)">🎁</div>
+  <div id="zoomOverlay">
+    <img id="zoomImg">
+    <div id="arrowLeft" class="swipe-arrow" onclick="prevZoom()">‹</div>
+    <div id="arrowRight" class="swipe-arrow" onclick="nextZoom()">›</div>
+    <div id="zoomClose" onclick="closeZoom()">×</div>
   </div>
 
-  <div id="gift1" class="hidden" style="margin-top:25px">💐 Every petal carries my feelings for you.</div>
+  <script>
+    for (let i = 0; i < 20; i++) {
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = "❤️";
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.animationDuration = 4 + Math.random() * 4 + "s";
+      document.body.appendChild(h);
+    }
+  </script>
 
-  <div id="gift2" class="hidden">
-    <div class="heart-grid">
-      <img src="photo1.jpg" onclick="zoom(this)">
-      <img src="photo2.jpg" onclick="zoom(this)">
-      <img src="photo3.jpg" onclick="zoom(this)">
-      <img src="photo4.jpg" onclick="zoom(this)">
-      <img src="photo5.jpg" onclick="zoom(this)">
-      <img src="photo6.jpg" onclick="zoom(this)">
-      <img src="photo7.jpg" onclick="zoom(this)">
-      <img src="photo8.jpg" onclick="zoom(this)">
-      <img src="photo9.jpg" onclick="zoom(this)">
-      <img src="photo10.jpg" onclick="zoom(this)">
-      <img src="photo11.jpg" onclick="zoom(this)">
-      <img src="photo12.jpg" onclick="zoom(this)">
-      <img src="photo13.jpg" onclick="zoom(this)">
-      <img src="photo14.jpg" onclick="zoom(this)">
-      <img src="photo15.jpg" onclick="zoom(this)">
-      <img src="photo16.jpg" onclick="zoom(this)">
-      <img src="photo17.jpg" onclick="zoom(this)">
-      <img src="photo18.jpg" onclick="zoom(this)">
-      <img src="photo19.jpg" onclick="zoom(this)">
-      <img src="photo20.jpg" onclick="zoom(this)">
-      <img src="photo21.jpg" onclick="zoom(this)">
-      <img src="photo22.jpg" onclick="zoom(this)">
-      <img src="photo23.jpg" onclick="zoom(this)">
-      <img src="photo24.jpg" onclick="zoom(this)">
-      <img src="photo25.jpg" onclick="zoom(this)">
-      <img src="photo26.jpg" onclick="zoom(this)">
-      <img src="photo27.jpg" onclick="zoom(this)">
-      <img src="photo28.jpg" onclick="zoom(this)">
-      <img src="photo29.jpg" onclick="zoom(this)">
-      <img src="photo30.jpg" onclick="zoom(this)">
-      <img src="photo31.jpg" onclick="zoom(this)">
-      <img src="photo32.jpg" onclick="zoom(this)">
-      <img src="photo33.jpg" onclick="zoom(this)">
-      <img src="photo34.jpg" onclick="zoom(this)">
-      <img src="photo35.jpg" onclick="zoom(this)">
-      <img src="photo36.jpg" onclick="zoom(this)">
-      <img src="photo37.jpg" onclick="zoom(this)">
+  <div class="container">
+
+    <div id="landing">
+      <h1>Will you be my Valentine? 💖</h1>
+      <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" style="max-width:100%;border-radius:16px">
+      <div style="margin-top:25px;display:flex;gap:20px;justify-content:center">
+        <button class="yes" onclick="acceptLove()">Yes 💕</button>
+        <button class="no" onclick="rejectLove()">No 😒</button>
+      </div>
     </div>
+
+    <div id="tryAgain" class="hidden">
+      <h1>Try again 😠💗</h1>
+      <img src="https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif">
+      <br><br>
+      <button class="yes" onclick="goBack()">Okay 😳</button>
+    </div>
+
+    <div id="presentsPage" class="hidden">
+      <h1>Precious Moments 🎁</h1>
+      <div class="presents">
+        <div class="present" onclick="openGift(1,this)">🎁</div>
+        <div class="present" onclick="openGift(2,this)">🎁</div>
+        <div class="present" onclick="openGift(3,this)">🎁</div>
+      </div>
+
+      <div id="gift1" class="hidden" style="margin-top:25px; position: relative; text-align: center;"> <img src="bouquet.png" id="bouquet" style="
+        position: absolute;
+        top: 50%;
+        right: -50px;          /* change to 'left: -50px;' for left side */
+        transform: translateY(-50%) rotate(-15deg);
+        width: 200px;           /* larger size */
+        animation: floatBouquet 4s ease-in-out infinite;
+    "> 💐 "A Thousand Heartbeats for You"
+        <br><br>
+        From the moment sunlight kissed the morning dew,
+        My thoughts have wandered, endlessly, to you.
+        Every whisper of the wind, every sigh of the night,
+        Carries your name softly, turning darkness into light.
+        <br><br>
+
+        In the quiet of dawn, when the world is still,
+        I trace the outlines of your smile, and my heart feels a thrill.
+        The way your laughter dances through the air,
+        It lingers in my soul, beyond all despair.
+        <br><br>
+
+        Each star above, each moonlit beam,
+        Reminds me of your eyes, like a gentle dream.
+        They sparkle with secrets, they shimmer with grace,
+        I could get lost forever in their warm embrace.
+        <br><br>
+
+        Through the storms that rage, through the trials I face,
+        It’s your love, my darling, that steadies the pace.
+        Every heartbeat, every fleeting thought,
+        Reaches only for you, the love I’ve always sought.
+        <br><br>
+
+        I write you letters that the sun may read,
+        I plant in the garden every whispered seed.
+        In petals of roses, in the soft morning rain,
+        I find your presence, soothing every pain.
+        <br><br>
+
+        The oceans may roar, the mountains may stand,
+        But nothing compares to holding your hand.
+        Through seasons that change and years that fly,
+        My heart will belong to you, until the day I die.
+        <br><br>
+
+        And if ever the world should turn cold and gray,
+        I will love you more with each passing day.
+        For you are the music, the poetry, the rhyme,
+        The eternal echo in the corridors of time.
+        <br><br>
+
+        So take this heart, as fragile as it may seem,
+        Wrapped in whispers, held in dreams.
+        Every beat, every breath, every unspoken vow,
+        Is my endless love for you, here and now.
+        <br><br>
+        Forever yours, in this life and the next,
+        <br><br>
+
+        Written by Aarav
+      </div>
+
+      <div id="gift2" class="hidden">
+        <div class="heart-grid">
+          <img src="photo1.jpg" onclick="zoom(this)">
+          <img src="photo2.jpg" onclick="zoom(this)">
+          <img src="photo3.jpg" onclick="zoom(this)">
+          <img src="photo4.jpg" onclick="zoom(this)">
+          <img src="photo5.jpg" onclick="zoom(this)">
+          <img src="photo6.jpg" onclick="zoom(this)">
+          <img src="photo7.jpg" onclick="zoom(this)">
+          <img src="photo8.jpg" onclick="zoom(this)">
+          <img src="photo9.jpg" onclick="zoom(this)">
+          <img src="photo10.jpg" onclick="zoom(this)">
+          <img src="photo11.jpg" onclick="zoom(this)">
+          <img src="photo12.jpg" onclick="zoom(this)">
+          <img src="photo13.jpg" onclick="zoom(this)">
+          <img src="photo14.jpg" onclick="zoom(this)">
+          <img src="photo15.jpg" onclick="zoom(this)">
+          <img src="photo16.jpg" onclick="zoom(this)">
+          <img src="photo17.jpg" onclick="zoom(this)">
+          <img src="photo18.jpg" onclick="zoom(this)">
+          <img src="photo19.jpg" onclick="zoom(this)">
+          <img src="photo20.jpg" onclick="zoom(this)">
+          <img src="photo21.jpg" onclick="zoom(this)">
+          <img src="photo22.jpg" onclick="zoom(this)">
+          <img src="photo23.jpg" onclick="zoom(this)">
+          <img src="photo24.jpg" onclick="zoom(this)">
+          <img src="photo25.jpg" onclick="zoom(this)">
+          <img src="photo26.jpg" onclick="zoom(this)">
+          <img src="photo27.jpg" onclick="zoom(this)">
+          <img src="photo28.jpg" onclick="zoom(this)">
+          <img src="photo29.jpg" onclick="zoom(this)">
+          <img src="photo30.jpg" onclick="zoom(this)">
+          <img src="photo31.jpg" onclick="zoom(this)">
+          <img src="photo32.jpg" onclick="zoom(this)">
+          <img src="photo33.jpg" onclick="zoom(this)">
+          <img src="photo34.jpg" onclick="zoom(this)">
+          <img src="photo35.jpg" onclick="zoom(this)">
+          <img src="photo36.jpg" onclick="zoom(this)">
+          <img src="photo37.jpg" onclick="zoom(this)">
+        </div>
+      </div>
+
+      <div id="gift3" class="hidden" style="margin-top:25px">❤️ Every moment I spend thinking of you feels like a beautiful eternity. From the way your laughter lights up even the dullest days, to the gentle warmth of your presence that soothes my heart, I find myself falling deeper in love with you with each passing second. Your smile is my sunrise, your voice my favorite song, and your eyes, the endless oceans I could get lost in forever. I love the way you see the world, the way your kindness touches everyone around you, and the way just being near you makes everything feel right. My heart beats for you in ways words can barely capture, and yet I try in every glance, in every gesture, in every thought I hold close. You are my confidant, my inspiration, my peace, and my greatest adventure all at once. I love you not just for who you are, but for how you make me feel, how you make me want to be better, how you make life brighter just by existing. If I could, I would gather every star in the sky, every petal in bloom, every note of music ever written, and lay them at your feet, but even that would never fully express the depth of my love. Every heartbeat of mine whispers your name, every dream I dream has your face in it, and every breath I take is a testament to how much you mean to me. You are my forever, my always, my everything, and loving you is the most natural, most beautiful thing I have ever known. I love you endlessly, immeasurably, and with a devotion that no time, no distance, no challenge could ever diminish.
+<br><br>
+Written by Aarav</div>
+
+      <button id="finalBtn" class="yes hidden" onclick="showFinal()" style="margin-top:30px">🎁 Another Present</button>
+    </div>
+
+    <div id="finalPage" class="hidden">
+      <h1>Scan it my love 💖</h1>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https://example.com">
+    </div>
+
   </div>
 
-  <div id="gift3" class="hidden" style="margin-top:25px">❤️ You are my favorite thought, always.</div>
+  <script>
+    const viewed = new Set();
 
-  <button id="finalBtn" class="yes hidden" onclick="showFinal()" style="margin-top:30px">🎁 Another Present</button>
-</div>
+    function acceptLove() {
+      landing.classList.add("hidden");
+      presentsPage.classList.remove("hidden");
+    }
 
-<div id="finalPage" class="hidden">
-  <h1>Scan it my love 💖</h1>
-  <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https://example.com">
-</div>
+    function rejectLove() {
+      landing.classList.add("hidden");
+      tryAgain.classList.remove("hidden");
+    }
 
-</div>
+    function goBack() {
+      tryAgain.classList.add("hidden");
+      landing.classList.remove("hidden");
+    }
 
-<script>
-const viewed=new Set();
+    function openGift(n, el) {
+      el.classList.add("opened");
+      setTimeout(() => el.classList.remove("opened"), 400);
+      ["gift1", "gift2", "gift3"].forEach(id => document.getElementById(id).classList.add("hidden"));
+      document.getElementById("gift" + n).classList.remove("hidden");
+      viewed.add(n);
+      if (viewed.size === 3) {
+        finalBtn.classList.remove("hidden");
+      }
+    }
 
-function acceptLove(){landing.classList.add("hidden"); presentsPage.classList.remove("hidden");}
-function rejectLove(){landing.classList.add("hidden"); tryAgain.classList.remove("hidden");}
-function goBack(){tryAgain.classList.add("hidden"); landing.classList.remove("hidden");}
-function openGift(n,el){el.classList.add("opened"); setTimeout(()=>el.classList.remove("opened"),400); ["gift1","gift2","gift3"].forEach(id=>document.getElementById(id).classList.add("hidden")); document.getElementById("gift"+n).classList.remove("hidden"); viewed.add(n); if(viewed.size===3){finalBtn.classList.remove("hidden");}}
-function showFinal(){presentsPage.classList.add("hidden"); finalPage.classList.remove("hidden");}
+    function showFinal() {
+      presentsPage.classList.add("hidden");
+      finalPage.classList.remove("hidden");
+    }
 
-// ZOOM + SWIPE
-let zoomOverlay=document.getElementById("zoomOverlay");
-let zoomImg=document.getElementById("zoomImg");
-let zoomImgs=[],currentZoom=0;
+    // ZOOM + SWIPE
+    let zoomOverlay = document.getElementById("zoomOverlay");
+    let zoomImg = document.getElementById("zoomImg");
+    let zoomImgs = [],
+      currentZoom = 0;
 
-function zoom(img){ zoomImgs=Array.from(document.querySelectorAll('.heart-grid img')); currentZoom=zoomImgs.indexOf(img); zoomImg.src=zoomImgs[currentZoom].src; zoomOverlay.style.display="flex"; }
-function closeZoom(){ zoomOverlay.style.display="none"; }
+    function zoom(img) {
+      zoomImgs = Array.from(document.querySelectorAll('.heart-grid img'));
+      currentZoom = zoomImgs.indexOf(img);
+      zoomImg.src = zoomImgs[currentZoom].src;
+      zoomOverlay.style.display = "flex";
+    }
 
-// touch swipe
-let startX=0,endX=0;
-zoomOverlay.addEventListener("touchstart",e=>{startX=e.changedTouches[0].screenX;});
-zoomOverlay.addEventListener("touchend",e=>{endX=e.changedTouches[0].screenX; handleSwipe();});
-function handleSwipe(){ if(endX<startX-50){ nextZoom(); } if(endX>startX+50){ prevZoom(); } }
+    function closeZoom() {
+      zoomOverlay.style.display = "none";
+    }
 
-// arrows click
-function nextZoom(){ currentZoom=(currentZoom+1)%zoomImgs.length; zoomImg.src=zoomImgs[currentZoom].src; }
-function prevZoom(){ currentZoom=(currentZoom-1+zoomImgs.length)%zoomImgs.length; zoomImg.src=zoomImgs[currentZoom].src; }
-</script>
+    // touch swipe
+    let startX = 0,
+      endX = 0;
+    zoomOverlay.addEventListener("touchstart", e => {
+      startX = e.changedTouches[0].screenX;
+    });
+    zoomOverlay.addEventListener("touchend", e => {
+      endX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (endX < startX - 50) {
+        nextZoom();
+      }
+      if (endX > startX + 50) {
+        prevZoom();
+      }
+    }
+
+    // arrows click
+    function nextZoom() {
+      currentZoom = (currentZoom + 1) % zoomImgs.length;
+      zoomImg.src = zoomImgs[currentZoom].src;
+    }
+
+    function prevZoom() {
+      currentZoom = (currentZoom - 1 + zoomImgs.length) % zoomImgs.length;
+      zoomImg.src = zoomImgs[currentZoom].src;
+    }
+  </script>
 
 </body>
+
 </html>

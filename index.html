@@ -8,10 +8,7 @@
 <style>
 :root { --red:#ff2f68; }
 
-* {
-  box-sizing: border-box;
-  font-family: Poppins, system-ui, sans-serif;
-}
+* { box-sizing: border-box; font-family: Poppins, system-ui, sans-serif; }
 
 body {
   margin: 0;
@@ -23,227 +20,68 @@ body {
   overflow-x: hidden;
 }
 
-.container {
-  max-width: 560px;
-  width: 100%;
-  padding: 20px;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-}
+.container { max-width: 560px; width: 100%; padding: 20px; text-align: center; position: relative; z-index: 2; }
 
 h1 { color: var(--red); }
 .hidden { display: none; }
 
-button {
-  padding: 12px 24px;
-  border-radius: 30px;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
+button { padding: 12px 24px; border-radius: 30px; border: none; font-size: 1rem; cursor: pointer; }
 .yes { background: var(--red); color: white; }
 .no  { background: white; color: var(--red); }
 
 /* Floating hearts */
-.heart {
-  position: fixed;
-  bottom: -20px;
-  font-size: 20px;
-  animation: floatUp 6s linear infinite;
-  opacity: .6;
-}
-
-@keyframes floatUp {
-  to { transform: translateY(-110vh) scale(1.4); opacity: 0; }
-}
+.heart { position: fixed; bottom: -20px; font-size: 20px; animation: floatUp 6s linear infinite; opacity: .6; }
+@keyframes floatUp { to { transform: translateY(-110vh) scale(1.4); opacity: 0; } }
 
 /* Presents */
-.presents {
-  display: flex;
-  gap: 32px;
-  justify-content: center;
-  margin-top: 30px;
-}
-
+.presents { display: flex; gap: 32px; justify-content: center; margin-top: 30px; }
 .present {
-  width: 90px;
-  height: 90px;
-  background: #fff;
-  border-radius: 22px;
+  width: 90px; height: 90px; background: #fff; border-radius: 22px;
   box-shadow: 0 16px 36px rgba(0,0,0,.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.2rem;
-  cursor: pointer;
-  animation: float 4s ease-in-out infinite;
-  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.2rem; cursor: pointer; animation: float 4s ease-in-out infinite; position: relative;
 }
-
 .present:nth-child(1){ transform: rotate(-8deg); }
 .present:nth-child(2){ transform: rotate(6deg); }
 .present:nth-child(3){ transform: rotate(-4deg); }
-
-@keyframes float {
-  50% { transform: translateY(-14px); }
-}
+@keyframes float { 50% { transform: translateY(-14px); } }
 
 /* Ribbon */
-.present::before,
-.present::after {
-  content: "";
-  position: absolute;
-  background: var(--red);
-  transition: .4s ease;
-}
-
-.present::before {
-  width: 12px;
-  height: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.present::after {
-  height: 12px;
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.present.opened::before,
-.present.opened::after {
-  opacity: 0;
-  transform: scale(0);
-}
+.present::before,.present::after{ content:""; position:absolute; background: var(--red); transition:.4s ease; }
+.present::before{ width:12px; height:100%; left:50%; transform: translateX(-50%);}
+.present::after{ height:12px; width:100%; top:50%; transform: translateY(-50%);}
+.present.opened::before,.present.opened::after{ opacity:0; transform: scale(0); }
 
 /* HEART GRID */
-.heart-grid {
-  display: grid;
-  grid-template-columns: repeat(11, 1fr);
-  grid-template-rows: repeat(7, 1fr);
-  gap: 10px;
-  max-width: 520px;
-  margin: 35px auto;
-  animation: pulse 3.5s ease-in-out infinite;
-}
+.heart-grid { display: grid; grid-template-columns: repeat(11, 1fr); grid-template-rows: repeat(7, 1fr); gap:10px; max-width:520px; margin:35px auto; animation:pulse 3.5s ease-in-out infinite; }
+@keyframes pulse { 50% { transform: scale(1.03); } }
 
-@keyframes pulse {
-  50% { transform: scale(1.03); }
-}
+.heart-grid img { width: 100%; aspect-ratio:1/1; object-fit:cover; border-radius:14px; cursor:pointer; box-shadow:0 0 12px rgba(255,47,104,.35); transition: transform .25s ease, box-shadow .25s ease;}
+.heart-grid img:hover { transform: scale(1.08); box-shadow:0 0 22px rgba(255,47,104,.6); }
 
-.heart-grid img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 14px;
-  cursor: pointer;
-  box-shadow: 0 0 12px rgba(255,47,104,.35);
-  transition: transform .25s ease, box-shadow .25s ease;
-}
-
-.heart-grid img:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 22px rgba(255,47,104,.6);
-}
-
-/* Mobile */
-@media (max-width: 520px) {
-  .heart-grid {
-    max-width: 92vw;
-    gap: 7px;
-  }
-}
+@media (max-width: 520px){ .heart-grid { max-width:92vw; gap:7px; } }
 
 /* GRID POSITIONS */
-/* Row 1 */
-.heart-grid img:nth-child(1){grid-column:3;grid-row:1;}
-.heart-grid img:nth-child(2){grid-column:4;grid-row:1;}
-.heart-grid img:nth-child(3){grid-column:8;grid-row:1;}
-.heart-grid img:nth-child(4){grid-column:9;grid-row:1;}
-/* Row 2 */
-.heart-grid img:nth-child(5){grid-column:2;grid-row:2;}
-.heart-grid img:nth-child(6){grid-column:3;grid-row:2;}
-.heart-grid img:nth-child(7){grid-column:4;grid-row:2;}
-.heart-grid img:nth-child(8){grid-column:5;grid-row:2;}
-.heart-grid img:nth-child(9){grid-column:7;grid-row:2;}
-.heart-grid img:nth-child(10){grid-column:8;grid-row:2;}
-.heart-grid img:nth-child(11){grid-column:9;grid-row:2;}
-.heart-grid img:nth-child(12){grid-column:10;grid-row:2;}
-/* Row 3 */
-.heart-grid img:nth-child(13){grid-column:2;grid-row:3;}
-.heart-grid img:nth-child(14){grid-column:3;grid-row:3;}
-.heart-grid img:nth-child(15){grid-column:4;grid-row:3;}
-.heart-grid img:nth-child(16){grid-column:5;grid-row:3;}
-.heart-grid img:nth-child(17){grid-column:6;grid-row:3;}
-.heart-grid img:nth-child(18){grid-column:7;grid-row:3;}
-.heart-grid img:nth-child(19){grid-column:8;grid-row:3;}
-.heart-grid img:nth-child(20){grid-column:9;grid-row:3;}
-.heart-grid img:nth-child(21){grid-column:10;grid-row:3;}
-/* Row 4 */
-.heart-grid img:nth-child(22){grid-column:3;grid-row:4;}
-.heart-grid img:nth-child(23){grid-column:4;grid-row:4;}
-.heart-grid img:nth-child(24){grid-column:5;grid-row:4;}
-.heart-grid img:nth-child(25){grid-column:6;grid-row:4;}
-.heart-grid img:nth-child(26){grid-column:7;grid-row:4;}
-.heart-grid img:nth-child(27){grid-column:8;grid-row:4;}
-.heart-grid img:nth-child(28){grid-column:9;grid-row:4;}
-/* Row 5 */
-.heart-grid img:nth-child(29){grid-column:4;grid-row:5;}
-.heart-grid img:nth-child(30){grid-column:5;grid-row:5;}
-.heart-grid img:nth-child(31){grid-column:6;grid-row:5;}
-.heart-grid img:nth-child(32){grid-column:7;grid-row:5;}
-.heart-grid img:nth-child(33){grid-column:8;grid-row:5;}
-/* Row 6 */
-.heart-grid img:nth-child(34){grid-column:5;grid-row:6;}
-.heart-grid img:nth-child(35){grid-column:6;grid-row:6;}
-.heart-grid img:nth-child(36){grid-column:7;grid-row:6;}
-/* Row 7 */
-.heart-grid img:nth-child(37){grid-column:6;grid-row:7;}
+/* Row 1 */ .heart-grid img:nth-child(1){grid-column:3;grid-row:1;} .heart-grid img:nth-child(2){grid-column:4;grid-row:1;} .heart-grid img:nth-child(3){grid-column:8;grid-row:1;} .heart-grid img:nth-child(4){grid-column:9;grid-row:1;}
+/* Row 2 */ .heart-grid img:nth-child(5){grid-column:2;grid-row:2;} .heart-grid img:nth-child(6){grid-column:3;grid-row:2;} .heart-grid img:nth-child(7){grid-column:4;grid-row:2;} .heart-grid img:nth-child(8){grid-column:5;grid-row:2;} .heart-grid img:nth-child(9){grid-column:7;grid-row:2;} .heart-grid img:nth-child(10){grid-column:8;grid-row:2;} .heart-grid img:nth-child(11){grid-column:9;grid-row:2;} .heart-grid img:nth-child(12){grid-column:10;grid-row:2;}
+/* Row 3 */ .heart-grid img:nth-child(13){grid-column:2;grid-row:3;} .heart-grid img:nth-child(14){grid-column:3;grid-row:3;} .heart-grid img:nth-child(15){grid-column:4;grid-row:3;} .heart-grid img:nth-child(16){grid-column:5;grid-row:3;} .heart-grid img:nth-child(17){grid-column:6;grid-row:3;} .heart-grid img:nth-child(18){grid-column:7;grid-row:3;} .heart-grid img:nth-child(19){grid-column:8;grid-row:3;} .heart-grid img:nth-child(20){grid-column:9;grid-row:3;} .heart-grid img:nth-child(21){grid-column:10;grid-row:3;}
+/* Row 4 */ .heart-grid img:nth-child(22){grid-column:3;grid-row:4;} .heart-grid img:nth-child(23){grid-column:4;grid-row:4;} .heart-grid img:nth-child(24){grid-column:5;grid-row:4;} .heart-grid img:nth-child(25){grid-column:6;grid-row:4;} .heart-grid img:nth-child(26){grid-column:7;grid-row:4;} .heart-grid img:nth-child(27){grid-column:8;grid-row:4;} .heart-grid img:nth-child(28){grid-column:9;grid-row:4;}
+/* Row 5 */ .heart-grid img:nth-child(29){grid-column:4;grid-row:5;} .heart-grid img:nth-child(30){grid-column:5;grid-row:5;} .heart-grid img:nth-child(31){grid-column:6;grid-row:5;} .heart-grid img:nth-child(32){grid-column:7;grid-row:5;} .heart-grid img:nth-child(33){grid-column:8;grid-row:5;}
+/* Row 6 */ .heart-grid img:nth-child(34){grid-column:5;grid-row:6;} .heart-grid img:nth-child(35){grid-column:6;grid-row:6;} .heart-grid img:nth-child(36){grid-column:7;grid-row:6;}
+/* Row 7 */ .heart-grid img:nth-child(37){grid-column:6;grid-row:7;}
 
 /* ZOOM OVERLAY */
-#zoomOverlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.85);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 99;
-}
-
-#zoomOverlay img {
-  max-width: 92vw;
-  max-height: 92vh;
-  border-radius: 18px;
-}
-
-/* SWIPE ARROWS */
-.swipe-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2.5rem;
-  color: white;
-  opacity: 0.7;
-  cursor: pointer;
-  user-select: none;
-  transition: opacity .3s;
-  display: none;
-  z-index: 100;
-}
-
-#arrowLeft { left: 10px; }
-#arrowRight { right: 10px; }
-
-.swipe-arrow.show { display: block; }
-.swipe-arrow:hover { opacity: 1; }
-
-@media (max-width: 768px) {
-  .swipe-arrow { display: block; }
-}
+#zoomOverlay { position: fixed; inset:0; background: rgba(0,0,0,.85); display:none; justify-content:center; align-items:center; z-index:99; }
+#zoomOverlay img { max-width:92vw; max-height:92vh; border-radius:18px; }
+/* Swipe arrows */
+.swipe-arrow { position:absolute; top:50%; transform:translateY(-50%); font-size:2.5rem; color:white; opacity:.7; cursor:pointer; user-select:none; transition:opacity .3s; z-index:100;}
+#arrowLeft { left:10px; }
+#arrowRight { right:10px; }
+.swipe-arrow:hover{opacity:1;}
+@media (max-width:768px){ .swipe-arrow { display:block; } }
+/* Close button */
+#zoomClose { position:absolute; top:12px; right:12px; font-size:2rem; color:white; cursor:pointer; z-index:101; opacity:.8; transition:.3s; }
+#zoomClose:hover{opacity:1;}
 </style>
 </head>
 
@@ -253,6 +91,7 @@ button {
   <img id="zoomImg">
   <div id="arrowLeft" class="swipe-arrow" onclick="prevZoom()">‹</div>
   <div id="arrowRight" class="swipe-arrow" onclick="nextZoom()">›</div>
+  <div id="zoomClose" onclick="closeZoom()">×</div>
 </div>
 
 <script>
@@ -286,16 +125,13 @@ for(let i=0;i<20;i++){
 
 <div id="presentsPage" class="hidden">
   <h1>Precious Moments 🎁</h1>
-
   <div class="presents">
     <div class="present" onclick="openGift(1,this)">🎁</div>
     <div class="present" onclick="openGift(2,this)">🎁</div>
     <div class="present" onclick="openGift(3,this)">🎁</div>
   </div>
 
-  <div id="gift1" class="hidden" style="margin-top:25px">
-    💐 Every petal carries my feelings for you.
-  </div>
+  <div id="gift1" class="hidden" style="margin-top:25px">💐 Every petal carries my feelings for you.</div>
 
   <div id="gift2" class="hidden">
     <div class="heart-grid">
@@ -339,13 +175,9 @@ for(let i=0;i<20;i++){
     </div>
   </div>
 
-  <div id="gift3" class="hidden" style="margin-top:25px">
-    ❤️ You are my favorite thought, always.
-  </div>
+  <div id="gift3" class="hidden" style="margin-top:25px">❤️ You are my favorite thought, always.</div>
 
-  <button id="finalBtn" class="yes hidden" onclick="showFinal()" style="margin-top:30px">
-    🎁 Another Present
-  </button>
+  <button id="finalBtn" class="yes hidden" onclick="showFinal()" style="margin-top:30px">🎁 Another Present</button>
 </div>
 
 <div id="finalPage" class="hidden">
@@ -356,73 +188,31 @@ for(let i=0;i<20;i++){
 </div>
 
 <script>
-const viewed = new Set();
+const viewed=new Set();
 
-function acceptLove(){
-  landing.classList.add("hidden");
-  presentsPage.classList.remove("hidden");
-}
-
-function rejectLove(){
-  landing.classList.add("hidden");
-  tryAgain.classList.remove("hidden");
-}
-
-function goBack(){
-  tryAgain.classList.add("hidden");
-  landing.classList.remove("hidden");
-}
-
-function openGift(n, el){
-  el.classList.add("opened");
-  setTimeout(()=>el.classList.remove("opened"),400);
-
-  ["gift1","gift2","gift3"].forEach(id =>
-    document.getElementById(id).classList.add("hidden")
-  );
-
-  document.getElementById("gift"+n).classList.remove("hidden");
-  viewed.add(n);
-
-  if(viewed.size===3){
-    finalBtn.classList.remove("hidden");
-  }
-}
-
-function showFinal(){
-  presentsPage.classList.add("hidden");
-  finalPage.classList.remove("hidden");
-}
+function acceptLove(){landing.classList.add("hidden"); presentsPage.classList.remove("hidden");}
+function rejectLove(){landing.classList.add("hidden"); tryAgain.classList.remove("hidden");}
+function goBack(){tryAgain.classList.add("hidden"); landing.classList.remove("hidden");}
+function openGift(n,el){el.classList.add("opened"); setTimeout(()=>el.classList.remove("opened"),400); ["gift1","gift2","gift3"].forEach(id=>document.getElementById(id).classList.add("hidden")); document.getElementById("gift"+n).classList.remove("hidden"); viewed.add(n); if(viewed.size===3){finalBtn.classList.remove("hidden");}}
+function showFinal(){presentsPage.classList.add("hidden"); finalPage.classList.remove("hidden");}
 
 // ZOOM + SWIPE
-let zoomOverlay = document.getElementById("zoomOverlay");
-let zoomImg = document.getElementById("zoomImg");
-let zoomImgs = [], currentZoom = 0;
+let zoomOverlay=document.getElementById("zoomOverlay");
+let zoomImg=document.getElementById("zoomImg");
+let zoomImgs=[],currentZoom=0;
 
-function zoom(img){
-  zoomImgs = Array.from(document.querySelectorAll('.heart-grid img'));
-  currentZoom = zoomImgs.indexOf(img);
-  zoomImg.src = zoomImgs[currentZoom].src;
-  zoomOverlay.style.display = "flex";
-}
-
-function closeZoom(){
-  zoomOverlay.style.display = "none";
-}
+function zoom(img){ zoomImgs=Array.from(document.querySelectorAll('.heart-grid img')); currentZoom=zoomImgs.indexOf(img); zoomImg.src=zoomImgs[currentZoom].src; zoomOverlay.style.display="flex"; }
+function closeZoom(){ zoomOverlay.style.display="none"; }
 
 // touch swipe
-let startX = 0, endX = 0;
-zoomOverlay.addEventListener("touchstart", e => { startX = e.changedTouches[0].screenX; });
-zoomOverlay.addEventListener("touchend", e => { endX = e.changedTouches[0].screenX; handleSwipe(); });
-
-function handleSwipe(){
-  if(endX < startX - 50){ nextZoom(); }
-  if(endX > startX + 50){ prevZoom(); }
-}
+let startX=0,endX=0;
+zoomOverlay.addEventListener("touchstart",e=>{startX=e.changedTouches[0].screenX;});
+zoomOverlay.addEventListener("touchend",e=>{endX=e.changedTouches[0].screenX; handleSwipe();});
+function handleSwipe(){ if(endX<startX-50){ nextZoom(); } if(endX>startX+50){ prevZoom(); } }
 
 // arrows click
-function nextZoom(){ currentZoom = (currentZoom+1)%zoomImgs.length; zoomImg.src=zoomImgs[currentZoom].src; }
-function prevZoom(){ currentZoom = (currentZoom-1+zoomImgs.length)%zoomImgs.length; zoomImg.src=zoomImgs[currentZoom].src; }
+function nextZoom(){ currentZoom=(currentZoom+1)%zoomImgs.length; zoomImg.src=zoomImgs[currentZoom].src; }
+function prevZoom(){ currentZoom=(currentZoom-1+zoomImgs.length)%zoomImgs.length; zoomImg.src=zoomImgs[currentZoom].src; }
 </script>
 
 </body>
